@@ -29,7 +29,7 @@
                         <td class="propertyvalue">
                             <div class="star-ratings-sprite" id="@Model.AverageRating">
                                 <span style="width:67%" class="star-ratings-sprite-rating"></span>
-                                
+
                             </div>
                         </td>
                     </tr>
@@ -47,6 +47,21 @@
                             }
                         }
                         <td class="propertyvalue">@phone</td>
+                    </tr>
+                    <tr>
+                        <td class="propertytype">Address: </td>
+                        @{
+                            var address = "";
+                            if (Model.Address == "") 
+                            {
+                                address = "No Address available...";
+                            }
+                            else
+                            {
+                                address = Model.Address;
+                            }
+                        }
+                        <td class="propertyvalue">@address</td>
                     </tr>
                 </table>
             </div>

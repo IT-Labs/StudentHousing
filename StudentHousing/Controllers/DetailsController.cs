@@ -13,19 +13,11 @@ namespace StudentHousing.Controllers
 {
     public class DetailsController : Controller
     {
-        // GET: /<controller>/
         private readonly IApartmentService _apartmentService;
-        private readonly IRatingService _ratingService;
-        private readonly ICityService _cityService;
         private readonly ILogger<DetailsController> _log;
-
-       // public IRatingService RatingService = _ratingService;
-
-        public DetailsController(IApartmentService apartmentService, IRatingService ratingService, ICityService cityService, ILogger<DetailsController> log)
+        public DetailsController(IApartmentService apartmentService, ILogger<DetailsController> log)
         {
             _apartmentService = apartmentService;
-            _ratingService = ratingService;
-            _cityService = cityService;
             _log = log;
         }
         [HttpGet]
@@ -49,6 +41,7 @@ namespace StudentHousing.Controllers
                     NumberOfBeds = _apartmentService.GetApartmentById(id).NumberOfBeds,
                     AverageRating = float.Parse(_apartmentService.GetApartmentById(id).AverageRating.ToString("0.00")),
                     Phone = _apartmentService.GetApartmentById(id).Phone,
+                    Address = _apartmentService.GetApartmentById(id).Address,
                     Description = _apartmentService.GetApartmentById(id).Description
 
                 };
