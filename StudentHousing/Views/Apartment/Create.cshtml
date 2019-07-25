@@ -1,0 +1,125 @@
+@model StudentHousing.Models.ApartmentModel
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link rel="stylesheet" href="~/lib/jqueryui/jquery-ui.css" />
+
+@if (Model?.IsLowerDate == true)
+{
+    <div class="alert alert-danger">Date can't be in past.</div>
+}
+@if (Model?.IsDuplicateName == true)
+{
+    <div class="alert alert-danger">Apartment name already exists.</div>
+}
+@if (Model?.IsTryCatch == true)
+{
+    <div class="alert alert-danger">There was an error while creating your apartment please try again.</div>
+}
+
+@Html.HiddenFor(m => m.NumberOfBedsList, Model.NumberOfBedsList)
+@Html.HiddenFor(m => m.Cities, Model.Cities)
+<div class="container body-content">
+    <div class="row">
+        <div class="col-md-12" id="form-container">
+            <h1>Create Apartment</h1>
+            <h3>Add your Apartment Details:</h3>
+            <p class="red" id="req">Required fields*</p>
+
+            <div class="dialog_wrapper">
+                <div id="confirmBox">
+                    <div class="white">
+                        <div class="message"></div>
+                        <div class="buttonsyesno">
+                            <span class="button yes">Yes</span>
+                            <span class="button no">No</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <form asp-action="Create" class="form-inline" id="Form1">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Name" class="control-label">Name:<span class=" red">*</span></label>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <br />
+                <div class="form-group">
+                    <label asp-for="CityId" class="control-label">City:<span class=" red">*</span></label>
+                    @Html.DropDownListFor(m => m.CityId, Model.Cities, new { @class = "form-control" })
+                    <span asp-validation-for="CityId" class="text-danger"></span>
+                </div>
+                <br />
+                <div class="form-group">
+                    <label id="pricelabel" asp-for="Price" class="control-label">Price per month:<span class=" red">*</span></label>
+                    $<input asp-for="Price" class="form-control" />
+                    <span asp-validation-for="Price" class="text-danger"></span>
+                </div>
+                <br />
+                <div class="form-group">
+                    <label asp-for="NumberOfBeds" class="control-label">Number of Beds:<span class=" red">*</span></label>
+                    @Html.DropDownListFor(m => m.NumberOfBeds, Model.NumberOfBedsList, new { @class = "form-control", @id = "numberofbeds" })
+                    <span asp-validation-for="NumberOfBeds" class="text-danger"></span>
+                </div>
+                <br />
+                <div class="form-group">
+                    <label asp-for="AvailableFrom" class="control-label">Available from:<span class=" red">*</span></label>
+                    @Html.TextBoxFor(model => model.AvailableFrom,
+                    new
+                         {
+                             @id = "AvailableFrom",
+                             @class = "form-control input-md datepicker",
+                             @autocomplete = "off",
+                         })
+                    @Html.ValidationMessageFor(model => model.AvailableFrom, "", new { @class = "text-danger" })
+                </div>
+                <br />
+                <div class="form-group">
+                    <label asp-for="Address" class="control-label">Address:</label>
+                    <input asp-for="Address" class="form-control" />
+                    <span asp-validation-for="Address" class="text-danger"></span>
+                </div>
+                <br />
+                <div class="form-group">
+                    <label asp-for="Phone" class="control-label">Contact Phone:</label>
+                    <input asp-for="Phone" class="form-control" />
+                    <span asp-validation-for="Phone" class="text-danger"></span>
+                </div>
+                <br />
+                <div class="form-group">
+                    <label asp-for="Description" class="control-label">Description:</label>
+                    <textarea asp-for="Description" class="form-control" id="description-area" maxlength="500"></textarea>
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                    <div id="counter">Characters: 0/500</div>
+                </div>
+                <br />
+                <br />
+                <div class="form-group">
+                    <input id="apartmentcreate" type="submit" value="Create" class="btn createbutton btn-default" />
+                </div>
+            </form>
+            <a class="backtolist" asp-controller="Home"
+               asp-action="Index">Back to Home Page</a>
+        </div>
+        <div class="row">
+        </div>
+    </div>
+</div>
+
+<div class="dim" hidden>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src="~/lib/jquery/jquery.js"></script>
+    <script src="~/lib/jqueryui/jquery-ui.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+    <script src="~/lib/jquery-validation/dist/additional-methods.js"></script>
+    <script src="~/js/CreateApt.js"></script>
+
+}
+

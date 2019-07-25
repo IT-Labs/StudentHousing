@@ -1,0 +1,68 @@
+﻿
+@{
+    ViewData["Title"] = "Details";
+}
+@using StudentHousing.Models
+@model ApartmentModel
+
+<div class="container body-content">
+    <div class="details-block">
+        <div class="top-part">
+            <img id="details-picture" src="~/images/apartment_img.png" />
+            <div class="info-panel">
+                <h3 id="aptname">@Model.Name</h3>
+                <table>
+                    <tr>
+                        <td class="propertytype">Price per month: </td>
+                        <td class="propertyvalue">$@Model.Price</td>
+                    </tr>
+                    <tr>
+                        <td class="propertytype">Available from: </td>
+                        <td class="propertyvalue">@Model.AvailableFrom.ToString().Split(" ")[0]</td>
+                    </tr>
+                    <tr>
+                        <td class="propertytype">Number of beds: </td>
+                        <td class="propertyvalue">@Model.NumberOfBeds</td>
+                    </tr>
+                    <tr>
+                        <td class="propertytype">Average rating: </td>
+                        <td class="propertyvalue">
+                            <div class="star-ratings-sprite" id="@Model.AverageRating">
+                                <span style="width:67%" class="star-ratings-sprite-rating"></span>
+                                
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="propertytype">Contact Phone: </td>
+                        @{
+                            var phone = "";
+                            if (Model.Phone == null)
+                            {
+                                phone = "No Contact Phone available...";
+                            }
+                            else
+                            {
+                                phone = Model.Phone.ToString();
+                            }
+                        }
+                        <td class="propertyvalue">@phone</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <div class="bottom-part">
+            <h3>Description</h3>
+            <p id="description-par">@Model.Description</p>
+        </div>
+        <div class="footer-buttons">
+            <a class="backtolist" asp-controller="Home"
+               asp-action="Index">Back to Home page</a>
+        </div>
+    </div>
+</div>
+
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script src="~/lib/jqueryui/jquery-ui.js"></script>
+<script src="~/js/Details.js"></script>
