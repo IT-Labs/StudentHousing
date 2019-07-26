@@ -48,7 +48,7 @@ namespace StudentHousing.Controllers
                     model.NumberOfBedsList = GetNumberOfBeds();
                     return View(model);
                 }
-                if(model.AvailableFrom <= DateTime.Now)
+                if (model.AvailableFrom < DateTime.Today)
                 {
                     model.Cities = GetAllCities();
                     model.NumberOfBedsList = GetNumberOfBeds();
