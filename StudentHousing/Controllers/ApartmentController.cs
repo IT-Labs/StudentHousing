@@ -116,10 +116,5 @@ namespace StudentHousing.Controllers
             return cities;
         }
 
-        public DateTime GetTodaysDate()
-        {
-            DateTime today = DateTime.Today;
-            return today.Date;
-        }
     }
 }
