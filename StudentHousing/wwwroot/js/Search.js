@@ -48,7 +48,7 @@
     });
 
     $("#CityDDL").change(function () {
-        var cityId = $("#CityDDL").val();
+        cityId = $("#CityDDL").val();
         var name = $("#name").val();
         var availableFrom = $("#availableFrom").val();
         var numberOfBeds = $("#numberOfBeds").val();
